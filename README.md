@@ -12,7 +12,7 @@ Useful scripts for some annoying things
 
 and then choose folder to save them.
 
-Also files saves to specifed folder as txt files.
+Also files saves to specifed folder as ```.txt``` files.
 
 
 
