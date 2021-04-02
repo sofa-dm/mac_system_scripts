@@ -12,60 +12,71 @@ class FileManager:
     Private methods:
         # todo: дописать аргументы
     """
-    def __init__(self, *kwargs):
-        for i, v in kwargs:
-            print(i, v)
+
+    def __init__(self, *args):
+        for i in args:
+            print(i)
 
     @staticmethod
-    def __set_config(self, path):  # where path is full path to home directory
-        where_to = ''
-        pass
+    def set_config():  # path is full path to home directory
+        # todo: Uncomment message below. Home directory setting automatically
+        # home_directory = input('Where is your home directory? e.g. /Users/dm\n')
+        home_directory = '/Users/dm'
+        file_dir = os.getcwd()
+        os.chdir(home_directory)
+        if os.path.exists(home_directory):
+            os.chdir(home_directory)
+            os.getcwd()
+            cwd = os.getcwd()  # Get the current working directory
+            print("Home directory is: {0}".format(cwd))  # Print the current working directory
+            # Check if configuration file already exists in the script root directory.
+            if os.path.exists(f'{file_dir}/make_sys_dump.conf'):
+                print('Configuration file already exists. What do we do?\n'
+                      'overwrite - to rewrite file\nnothing - break program\n'
+                      'use_current - use current .conf file\n'
+                      'show conf file')
+                # todo: поменять инпут
+                # user_input = input()
+                user_input = 'use_current'
+                if user_input == 'overwrite':
+                    # create conf file as new
+                    with open(f'{file_dir}/make_sys_dump.conf', 'w+') as f:
+                        f.write(f'[make sys dump config file]\n'
+                                f'home_directory: {home_directory}')
+                elif user_input == 'show conf file':
+                    with open(f'{file_dir}/make_sys_dump.conf', 'r') as f:
+                        print(f.read())
+                else:
+                    pass
+            else:  # create new file if directory is not exists
+                with open(f'{file_dir}/make_sys_dump.conf', 'w+') as f:
+                    f.write(f'[make sys dump config file]\n'
+                            f'home_directory: {home_directory}')
 
-    def copy_to_dir(self, where_to):
+        else:
+            print('Home directory is not set')
+
+    @staticmethod
+    def create_backup(self):
+        while True:
+            user_input = input('Do you want to create backups when new files uploaded? [y, n) ?')
+            if user_input == '':
+                pass
+
+    def __copy_to_dir(self, where_to):
         # print(self.kwargs)
         # todo:
         pass
 
-    def __is_exists(self, path_to_file):
-        pass
 
+# print('hello again')
 
+files_directories = {'.zshrc', '.vimrc', '.aliases', '.zsh_history'}
 
-
-
-print('hello again')
-
-files_directories = {'zshrc': '', 'vimrc': ''}
-
-files = FileManager()
-
+files = FileManager(files_directories)
+files.set_config()
 # Get the current working directory
-cwd = os.getcwd()
+# cwd = os.getcwd()
 
 # Print the current working directory
-print("Current working directory: {0}".format(cwd))
-
-home_directory = '/Users/dm'
-
-os.chdir(home_directory)
-
-
-# Get the current working directory
-cwd = os.getcwd()
-
-# Print the current working directory
-print("Current working directory: {0}".format(cwd))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# print("Current working directory: {0}".format(cwd))
