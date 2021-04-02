@@ -63,20 +63,20 @@ class FileManager:
             if user_input == '':
                 pass
 
-    def __copy_to_dir(self, where_to):
+    def backup(self):
         # print(self.kwargs)
-        # todo:
-        pass
+        # go to home directory
 
 
-# print('hello again')
+        os.chdir('/Users/dm/Dev/mac_system_scripts')
+        print(f'current directory is: {os.getcwd()}')
 
-files_directories = {'.zshrc', '.vimrc', '.aliases', '.zsh_history'}
+        # with
 
-files = FileManager(files_directories)
-files.set_config()
-# Get the current working directory
-# cwd = os.getcwd()
 
-# Print the current working directory
-# print("Current working directory: {0}".format(cwd))
+if __name__ == '__main__':
+    files_names = ['.zshrc', '.vimrc', '.aliases', '.zsh_history']
+    files = FileManager(files_names)
+    # files.set_config()
+    files.backup()
+
