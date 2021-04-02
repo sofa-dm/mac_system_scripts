@@ -9,6 +9,7 @@ Useful scripts for some annoying things
 - .dircolors - uses to colorize iTerm2 input
 - .gitconfig
 - .zsh_history
+- ~/Library/Preferences/com.googlecode.iterm2.plist - iTerm2 configuration
 
 and then choose folder to save them.
 
