@@ -15,7 +15,7 @@ and then choose folder to save them.
 Also files saves to specifed folder as ```.txt``` files with README.txt.
 
 
-```first_config``` - provides user to install some basic apps and etc.
+```first_config.py``` - provides user to install some basic apps and etc.
 - install **brew**
 - download **chrome** to desktop
 - install **iTerm2** - Terminal alternative
