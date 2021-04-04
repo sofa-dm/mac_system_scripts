@@ -1,0 +1,225 @@
+#!/bin/zsh
+
+# NAVIGATION
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+# COMMON DIRECTORIES
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias dc="cd ~/Documents"
+alias p="cd ~/Documents/projects"
+alias home="cd ~"
+# GIT
+alias g="git"
+alias gs="git status"
+alias gd="git diff"
+alias gb="git branch"
+alias gm="git checkout master"
+
+# alias python="/usr/local/bin/python3"
+alias r=". ~/.zshrc"
+
+# tilde remap 
+alias remap="hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035, "HIDKeyboardModifierMappingDst":0x700000064}, {"HIDKeyboardModifierMappingSrc":0x700000064, "HIDKeyboardModifierMappingDst":0x700000035}]}'"
+
+
+# COLORED ls COMMAND
+# alias ll='ls -lG'
+# alias ls='ls -G'
+
+
+alias c="clear"
+
+alias h="
+  printf '\033[1;96mПросмотр содержимого папки\033[0m
+ls                      \033[92m показать содержимое папки\033[0m
+ls -a                   \033[92m # то же, но показывать и скрытые файлы и папки\033[0m
+ls -a -1                \033[92m # то же, но в один столбец\033[0m
+ls build/css            \033[92m # показать содержимое папки ТЕКУЩАЯ_ПАПКА/build/css\033[0m
+ls /d/projects          \033[92m # показать содержимое папки D:/projects\033[0m
+ls pyth*                \033[92m # показать файлы с названием pyth*\033[0m
+
+
+
+\033[1;96mПереход по папкам\033[0m
+cd projects             \033[92m# переход в папку projects, которая есть в текущей папке\033[0m
+cd /d/projects          \033[92m# windows: переход в папку projects, расположенную по адресу D:/projects\033[0m
+cd ..                   \033[92m# переход к родительской папке\033[0m
+cd -                    \033[92m# переход к последней рабочей папке\033[0m
+cd !$                   \033[92m# переход в новосозданную папку (после mkdir)\033[0m
+
+\033[1;96mСоздание папок и файлов\033[0m
+mkdir project                        \033[92m# создать папку с именем «project»\033[0m
+mkdir project project/css project/js \033[92m# создать несколько папок\033[0m
+mkdir -p project/{css,js}            \033[92m# то же, что выше\033[0m
+touch index.html                     \033[92m# создать файл\033[0m
+touch index.html css/style.css js/script.js \033[92m# создать файлы (папки css/ и js/ должны уже существовать)\033[0m
+
+\033[1;96mКопирование файлов\033[0m
+cp index.html catalog.html \033[92m# копирование файла index.html в тот же каталог с переименованием в catalog.html\033[0m
+cp index.html old/         \033[92m# копирование файла index.html в папку old/ (все произойдет в текущей папке)\033[0m
+cp temp/ temp2/ -r         \033[92m# дублирование каталога\033[0m
+
+\033[1;96mПереименование или перемещение файлов\033[0m
+mv index.html old              \033[92m# перемещение файла в папку\033[0m
+mv index.html old/new_name.txt \033[92m# перемещение файла в папку с переименованием файла\033[0m
+mv order.txt orderNew.txt      \033[92m# переименовать файл\033[0m
+
+\033[1;96mУдаление папок и файлов\033[0m
+rm ghost.png             \033[92m# удалить файл\033[0m
+rm -rf old               \033[92m# удалить папку и всё из нее\033[0m
+
+\033[1;96mРазные мелочи\033[0m
+rm -rf node_modules && npm i        \033[92m# выполнение первой части команды (до &&) и, при отсутствии ошибок, второй части (после &&)\033[0m
+pwd                                 \033[92m# «где я?»\033[0m
+cat ~/.bash_profile                 \033[92m# вывести в консоль содержимое файла\033[0m
+ls -a >> file.txt                   \033[92m# записать в file.txt результат вывода команды ls -a\033[0m
+echo '\''some text'\'' >> readme.md       \033[92m# дописать строку в конец файла\033[0m
+df -h                               \033[92m# показать статистику использования пространства на дисках\033[0m
+grep -i -n --color '\''carousel'\'' index.html css/style.css \033[92m# найти слово carousel\033[0m
+                                    \033[92m# в двух указанных файлах (с игнором регистра),\033[0m
+                                    \033[92m# вывести строки с этим словом и номера строк (искомое слово подсветить)\033[0m
+grep word -r project                \033[92m# найти слово word во всех файлах в папке project\033[0m
+find . -iname '\''*ind*'\''               \033[92m# найти в текущей папке (и подпапках) все файлы,\033[0m
+                                    \033[92m# имена которых содержат ind и показать списком\033[0m
+curl -O https://vlc.org/vlc.dmg     \033[92m# скачивание файлов без браузера\033[0m
+top                                 \033[92m# просмотр всех активных процессов\033[0m
+defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock   \033[92m# ускорение анимации дока (ВКЛ)\033[0m
+defaults write com.apple.dock autohide-time-modifier -float 0.7 && killall Dock \033[92m# ускорение анимации дока (ВЫКЛ)\033[0m
+uptime                              \033[92m# время работы Mac\033[0m
+'
+"
+
+alias hvim="
+    printf '  \033[1;96mTEXT EDITING - INSERTION\033[0m
+1. The cursor is moved using either the arrow keys or the hjkl keys.
+	\033[1;92m h \033[0m (left)	\033[1;92m j \033[0m (down)       \033[1;92m k \033[0m (up)	    \033[1;92ml \033[0m(right)
+2. To start Vim from the shell prompt type:  \033[1;92m vim FILENAME <ENTER> \033[0m
+3. To exit Vim type:	   <ESC>   \033[1;92m :q! \033[0m	 <ENTER>  to trash all changes.
+	     OR type:	   <ESC>   \033[1;92m :wq \033[0m	 <ENTER>  to save the changes.
+4. To delete the character at the cursor type:  \033[1;96m x \033[0m
+5. To insert or append text type:
+	 \033[1;92m i \033[0m   type inserted text   <ESC>		insert before the cursor
+	 \033[1;92m A \033[0m   type appended text   <ESC>    append after the line
+
+NOTE: Pressing <ESC> will place you in Normal mode or will cancel
+      an unwanted and partially completed command.
+
+  \033[1;96mDELETING\033[0m
+1. To delete from the cursor up to the next word type:   \033[1;92m dw \033[0m
+2. To delete from the cursor to the end of a line type:   \033[1;92m d$ \033[0m
+3. To delete a whole line type:   \033[1;92m dd \033[0m
+4. To repeat a motion prepend it with a number:  \033[1;92m 2w \033[0m
+5. The format for a change command is:
+              \033[1;92m operator   [number]   motion \033[0m
+     where:
+       operator - is what to do, such as  d  for delete
+       [number] - is an optional count to repeat the motion
+       motion   - moves over the text to operate on, such as  w (word),
+		   $ (to the end of line), etc.
+6. To move to the start of the line use a zero: \033[1;92m 0 \033[0m
+7. To undo previous actions, type: 	      \033[1;92m u \033[0m (lowercase u)
+     To undo all the changes on a line, type: \033[1;92m U \033[0m (capital U)
+     To undo the undo, type:		      \033[1;92m CTRL-R \033[0m
+
+  \033[1;96mPUT, REPLACE, CHANGE\033[0m
+1. To put back text that has just been deleted, type  \033[1;92m p\033[0m .  This puts the
+     deleted text AFTER the cursor (if a line was deleted it will go on the
+     line below the cursor).
+2. To replace the character under the cursor, type   \033[1;92m r \033[0m  and then the
+     character you want to have there.
+3. The change operator allows you to change from the cursor to where the
+     motion takes you.  eg. Type  ce  to change from the cursor to the end of
+     the word,\033[1;92m c$ \033[0m to change to the end of a line.
+4. The format for change is:
+	\033[1;92m c   [number] \033[0m  motion
+
+  \033[1;96mCURSOR LOCATION AND FILE STATUS, THE SEARCH COMMAND, MATCHING PARENTHESES SEARCH, SUBSTITUTE\033[0m
+1. \033[1;92mCTRL-G \033[0m displays your location in the file and the file status.
+             \033[1;92mG \033[0m moves to the end of the file.
+     number  G  moves to that line number.
+            \033[1;92mgg \033[0m moves to the first line.
+2. Typing  \033[1;92m/\033[0m	followed by a phrase searches FORWARD for the phrase.
+     Typing  \033[1;92m?\033[0m	followed by a phrase searches BACKWARD for the phrase.
+     After a search type  \033[1;92mn\033[0m  to find the next occurrence in the same direction
+     or  \033[1;92mN\033[0m  to search in the opposite direction.
+     \033[1;92mCTRL-O\033[0m takes you back to older positions, \033[1;92mCTRL-I\033[0m to newer positions.
+3. Typing  \033[1;92m percent symbol\033[0m	while the cursor is on a (,),[,],{, or } goes to its match.
+4. To substitute new for the first old in a line type    \033[1;92m:s/old/new\033[0m
+     To substitute new for all old on a line type	   \033[1;92m:s/old/new/g\033[0m
+     To substitute phrases between two line # type	   \033[1;92m:#,#s/old/new/g\033[0m
+     To substitute all occurrences in the file type	   \033[1;92m:%s/old/new/g\033[0m
+     To ask for confirmation each time add c		   \033[1;92m:%s/old/new/gc\033[0m
+
+  \033[1;96mEXECUTE AN EXTERNAL COMMAND, MERGING, ETC\033[0m
+1.  \033[1;92m:!command  executes an external command.
+      Some useful examples are:
+	 (Windows)	  (Unix)
+	  \033[1;92m:!dir\033[0m		   \033[1;92m:!ls\033[0m		   -  shows a directory listing.
+	  \033[1;92m:!del FILENAME\033[0m   \033[1;92m:!rm FILENAME\033[0m   -  removes file FILENAME.
+2.  \033[1;92m:w FILENAME\033[0m  writes the current Vim file to disk with name FILENAME.
+3.  \033[1;92mv  motion  :w FILENAME\033[0m  saves the Visually selected lines in file
+      FILENAME.
+4.  \033[1;92m:r FILENAME\033[0m  retrieves disk file FILENAME and puts it below the
+      cursor position.
+5.  \033[1;92m:r !dir\033[0m  reads the output of the dir command and puts it below the
+      cursor position.
+
+  \033[1;96mCOPY AND PASTE, SET OPTION\033[0m
+1. Type \033[1;92m o\033[0m  to open a line BELOW the cursor and start Insert mode.
+     Type \033[1;92m O\033[0m  to open a line ABOVE the cursor.
+2. Type \033[1;92m a\033[0m  to insert text AFTER the cursor.
+     Type \033[1;92m A\033[0m  to insert text after the end of the line.
+3. The \033[1;92m e \033[0m command moves to the end of a word.
+4. The \033[1;92m y \033[0m operator yanks (copies) text,  p  puts (pastes) it.
+5. Typing a capital \033[1;92m R \033[0m enters Replace mode until  <ESC>  is pressed.
+6. \033[1;92mCopy text to register \"ry . Then to get it back type \"<reg_name>p \033[0m 
+
+  \033[1;96mGETTING HELP, COMPLETION\033[0m
+1. Type  \033[1;92m:help\033[0m  or press <F1> or <HELP>  to open a help window.
+2. Type  \033[1;92m:help cmd\033[0m  to find help on  cmd .
+3. Type  \033[1;92mCTRL-W CTRL-W \033[0m to jump to another window.
+4. Type  \033[1;92m:q\033[0m  to close the help window.
+5. Create a vimrc startup script to keep your preferred settings.
+6. When typing a  \033[1;92m:\033[0m  command, press \033[1;92mCTRL-D\033[0m to see possible completions.
+     Press \033[1;92m<TAB>\033[0m to use one completion.
+'
+"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

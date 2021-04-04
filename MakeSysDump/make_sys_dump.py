@@ -1,44 +1,30 @@
+#!/usr/local/bin/python3
 import os
 import shutil
-import os
+import pathlib
+from datetime import datetime
 
-# function to copy full directory
+dt = str(datetime.now()).split(' ')
+backup_name = 'backup_from_' + dt[0] + '_' + dt[1].split('.')[0].rstrip(':').replace(':', '-')[:-3]
+print(backup_name)
 
-def copytree(src, dst, symlinks=False, ignore=None):
-    for item in os.listdir(src):
-        s = os.path.join(src, item)
-        d = os.path.join(dst, item)
-        if os.path.isdir(s):
-            shutil.copytree(s, d, symlinks, ignore)
-        else:
-            shutil.copy2(s, d)
+current_path = '/Users/dm/Dev/mac_system_scripts/MakeSysDump'
 
-with open('/Users/dm/Dev/mac_system_scripts/MakeSysDump/make_sys_dump.conf', 'r') as conf:
-    conf = conf.read()
+pathlib.Path(f"{current_path}/backups/{backup_name}").mkdir(parents=True, exist_ok=True)
 
-    # parse conf file to dictionary {'home_directory': '/usr/dm/dev'}
-    conf = conf.split('\n')[1:]
-    conf_dict = {}
-    for i in conf:
-        parameter = i.split(':')
-        if len(parameter) == 2:
-            conf_dict[parameter[0]] = parameter[1].lstrip().rstrip()
+# Copy Files
+# .zaliases, .dircolors, .hushlogin, .vimrc, .zcompdump, .zprofile, .zsh_history, .zshrc
+#
+print(shutil.copyfile('/Users/dm/.zaliases', f"{current_path}/backups/{backup_name}/.zaliases"))
+print(shutil.copyfile('/Users/dm/.hushlogin', f"{current_path}/backups/{backup_name}/.hushlogin"))
+print(shutil.copyfile('/Users/dm/.vimrc', f"{current_path}/backups/{backup_name}/.vimrc"))
+print(shutil.copyfile('/Users/dm/.zcompdump', f"{current_path}/backups/{backup_name}/.zcompdump"))
+print(shutil.copyfile('/Users/dm/.zprofile', f"{current_path}/backups/{backup_name}/.zprofile"))
+print(shutil.copyfile('/Users/dm/.zshrc', f"{current_path}/backups/{backup_name}/.zshrc"))
 
-# generate full path to file: home_path+fle_name
-conf_dict['files_to_copy'] = [conf_dict['home_directory'] + '/' + file_path.lstrip().rstrip() for file_path in conf_dict['files_to_copy'].split(',')]
 
-print(conf_dict['files_to_copy'])
-
-# copying files
-for file in conf_dict['files_to_copy']:
-    home_dir = conf_dict['home_directory']
-    backup_folder = conf_dict['backups_folder']
-    # copy
-    print(os.path.exists(conf_dict['backups_folder'] + '/' + file))
-    shutil.copy(file, conf_dict['backups_folder'])
-    shutil.copytree(file, conf_dict['backup_folder'], ignore=shutil.ignore_patterns(".*"))
-
-print(conf_dict['home_directory'])
+# Copy directory
+shutil.copytree('/Users/dm/.dircolors', f"{current_path}/backups/{backup_name}/.dircolors", ignore=shutil.ignore_patterns(".*"))
 
 
 
