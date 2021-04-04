@@ -30,6 +30,10 @@ cp -R .dircolors/* Desktop/zsh_backup_$(date +"%d-%m-%Y")/.dircolors/;
 
 ls -l Desktop/zsh_backup_$(date +"%d-%m-%Y")/;
 
+# Create README.txt
+cd ~ && cd Desktop/zsh_backup_$(date +"%d-%m-%Y");
+echo 'Files are hidden. Press cmd+/ to show hidden files\nand put them to the home directory.' >> README.txt
+
 echo 'Completed'
 read ok;
 
